@@ -231,7 +231,7 @@ const PawNamesApp = () => {
     );
   }
 
-  // 仪表板
+  // 仪表盘
   if (currentScreen === 'dashboard') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
@@ -501,7 +501,7 @@ const PawNamesApp = () => {
                 <button
                   onClick={() => setWizardStep(4)}
                   disabled={!wizardData.appearance.color || !wizardData.appearance.size}
-                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
                 >
                   下一步
                   <ArrowRight className="w-5 h-5" />
@@ -546,7 +546,7 @@ const PawNamesApp = () => {
                 <button
                   onClick={() => setWizardStep(5)}
                   disabled={wizardData.personality.length === 0}
-                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
                 >
                   下一步
                   <ArrowRight className="w-5 h-5" />
@@ -592,7 +592,7 @@ const PawNamesApp = () => {
                 <button
                   onClick={generateNames}
                   disabled={wizardData.style.length === 0}
-                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-5 h-5 animate-pulse" />
                   生成专属名字
@@ -817,378 +817,6 @@ const PawNamesApp = () => {
                 </div>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // 名字结果页面
-  if (currentScreen === 'results') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
-        <div className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-10">
-          <div className="max-w-4xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <button onClick={() => setCurrentScreen('wizard')} className="flex items-center gap-2 text-gray-600">
-                <ChevronLeft className="w-5 h-5" />
-                重新生成
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <PawPrint className="w-5 h-5 text-white" />
-                </div>
-                <span className="font-bold text-xl">PawNames</span>
-              </div>
-              <button onClick={() => setCurrentScreen('dashboard')} className="text-gray-600">
-                完成
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 text-gray-800">精心为你挑选的名字</h1>
-            <p className="text-gray-600">点击收藏喜欢的名字</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {generatedNames.map((name, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-3xl font-bold text-gray-800">{name.name}</h3>
-                      <div className="px-3 py-1 bg-purple-100 rounded-full">
-                        <span className="text-xs font-semibold text-purple-600">{name.score}分</span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-500">{name.origin}</p>
-                  </div>
-                  <button onClick={() => toggleSaveName(name)} className="p-2">
-                    <Bookmark className={`w-6 h-6 ${savedNames.find(n => n.name === name.name) ? 'fill-pink-500 text-pink-500' : 'text-gray-400'}`} />
-                  </button>
-                </div>
-                
-                <p className="text-gray-700 mb-4">{name.meaning}</p>
-                
-                <div className="flex gap-2">
-                  <button className="flex-1 flex items-center justify-center gap-2 py-2 border-2 border-gray-200 rounded-lg">
-                    <Volume2 className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm font-semibold">试读</span>
-                  </button>
-                  <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold">
-                    选择
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {savedNames.length > 0 && (
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                <Heart className="w-5 h-5 text-pink-500" />
-                我的收藏 ({savedNames.length})
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {savedNames.map((name, idx) => (
-                  <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-lg border-2 border-purple-200">
-                    <span className="font-semibold text-purple-700">{name.name}</span>
-                    <button onClick={() => toggleSaveName(name)} className="text-purple-400">×</button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // 宠物出生证明生成页面
-  if (currentScreen === 'certificate') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
-        <div className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-10">
-          <div className="max-w-5xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <button 
-                onClick={() => {
-                  if (certStep === 1) {
-                    setCurrentScreen('results');
-                  } else {
-                    setCertStep(1);
-                  }
-                }}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
-              >
-                <ChevronLeft className="w-5 h-5" />
-                返回
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <PawPrint className="w-5 h-5 text-white" />
-                </div>
-                <span className="font-bold text-xl">PawNames</span>
-              </div>
-              <div className="w-16"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-5xl mx-auto px-6 py-8">
-          {certStep === 1 && (
-            <>
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-4 shadow-lg">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-                <h1 className="text-3xl font-bold mb-2 text-gray-800">生成宠物出生证明</h1>
-                <p className="text-gray-600">填写宠物信息，生成精美的数字证书</p>
-              </div>
-
-              <div className="max-w-2xl mx-auto">
-                <div className="bg-white rounded-3xl p-8 shadow-lg mb-6">
-                  <h3 className="text-xl font-bold mb-6 text-gray-800 flex items-center gap-2">
-                    <Award className="w-5 h-5 text-purple-500" />
-                    选定的名字
-                  </h3>
-                  <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="text-3xl font-bold text-gray-800 mb-2">
-                          {selectedNameForCert?.name}
-                        </h4>
-                        <p className="text-gray-600 mb-2">{selectedNameForCert?.meaning}</p>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs px-2 py-1 bg-white rounded-full text-gray-600">
-                            {selectedNameForCert?.origin}
-                          </span>
-                          <span className="text-xs px-2 py-1 bg-white rounded-full text-purple-600 font-semibold">
-                            评分: {selectedNameForCert?.score}
-                          </span>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setCurrentScreen('results')}
-                        className="text-sm text-purple-600 hover:text-purple-700 underline"
-                      >
-                        更换名字
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-3xl p-8 shadow-lg">
-                  <h3 className="text-xl font-bold mb-6 text-gray-800 flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-pink-500" />
-                    补充信息
-                  </h3>
-                  
-                  <div className="space-y-5">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        主人姓名 <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={certData.ownerName}
-                        onChange={(e) => setCertData({...certData, ownerName: e.target.value})}
-                        placeholder="请输入您的姓名"
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        出生日期 <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="date"
-                        value={certData.birthDate}
-                        onChange={(e) => setCertData({...certData, birthDate: e.target.value})}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        领养日期
-                      </label>
-                      <input
-                        type="date"
-                        value={certData.adoptDate}
-                        onChange={(e) => setCertData({...certData, adoptDate: e.target.value})}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        特殊备注
-                      </label>
-                      <textarea
-                        value={certData.specialNote}
-                        onChange={(e) => setCertData({...certData, specialNote: e.target.value})}
-                        placeholder="记录特殊时刻或寓意（选填）"
-                        rows={3}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none transition-all resize-none"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => setCertStep(2)}
-                    disabled={!certData.ownerName || !certData.birthDate}
-                    className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    <FileText className="w-5 h-5" />
-                    生成证明
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-
-          {certStep === 2 && (
-            <>
-              <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold mb-2 text-gray-800">🎉 证明生成成功！</h1>
-                <p className="text-gray-600">您可以下载、打印或分享这份珍贵的证书</p>
-              </div>
-
-              <div className="max-w-4xl mx-auto mb-8">
-                <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="relative bg-gradient-to-br from-purple-100 via-pink-50 to-orange-50 p-12">
-                    {/* 装饰性边框 */}
-                    <div className="absolute top-4 left-4 w-16 h-16 border-t-4 border-l-4 border-purple-300 rounded-tl-2xl"></div>
-                    <div className="absolute top-4 right-4 w-16 h-16 border-t-4 border-r-4 border-pink-300 rounded-tr-2xl"></div>
-                    <div className="absolute bottom-4 left-4 w-16 h-16 border-b-4 border-l-4 border-pink-300 rounded-bl-2xl"></div>
-                    <div className="absolute bottom-4 right-4 w-16 h-16 border-b-4 border-r-4 border-purple-300 rounded-br-2xl"></div>
-
-                    {/* 证书主体 */}
-                    <div className="relative bg-white rounded-2xl p-10 shadow-lg">
-                      {/* 标题 */}
-                      <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-4 shadow-lg">
-                          <PawPrint className="w-10 h-10 text-white" />
-                        </div>
-                        <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                          宠物出生证明
-                        </h2>
-                        <p className="text-gray-500 text-sm">Pet Birth Certificate</p>
-                      </div>
-
-                      {/* 分割线 */}
-                      <div className="h-1 bg-gradient-to-r from-purple-300 via-pink-300 to-orange-300 rounded-full mb-8"></div>
-
-                      {/* 信息区域 */}
-                      <div className="space-y-6">
-                        {/* 名字 */}
-                        <div className="text-center mb-8">
-                          <p className="text-gray-600 mb-2">名字 / Name</p>
-                          <h3 className="text-5xl font-bold text-gray-800 mb-3">
-                            {selectedNameForCert?.name}
-                          </h3>
-                          <div className="max-w-md mx-auto p-4 bg-purple-50 rounded-xl">
-                            <p className="text-gray-700 text-sm leading-relaxed">
-                              {selectedNameForCert?.meaning}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* 详细信息 */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5">
-                            <p className="text-sm text-gray-600 mb-1">主人姓名</p>
-                            <p className="text-lg font-bold text-gray-800">{certData.ownerName}</p>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-xl p-5">
-                            <p className="text-sm text-gray-600 mb-1">出生日期</p>
-                            <p className="text-lg font-bold text-gray-800">{certData.birthDate}</p>
-                          </div>
-
-                          {certData.adoptDate && (
-                            <div className="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-5">
-                              <p className="text-sm text-gray-600 mb-1">领养日期</p>
-                              <p className="text-lg font-bold text-gray-800">{certData.adoptDate}</p>
-                            </div>
-                          )}
-
-                          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5">
-                            <p className="text-sm text-gray-600 mb-1">名字来源</p>
-                            <p className="text-lg font-bold text-gray-800">{selectedNameForCert?.origin}</p>
-                          </div>
-                        </div>
-
-                        {/* 特殊备注 */}
-                        {certData.specialNote && (
-                          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-5 border-2 border-purple-200">
-                            <p className="text-sm text-gray-600 mb-2">特殊备注</p>
-                            <p className="text-gray-700 leading-relaxed">{certData.specialNote}</p>
-                          </div>
-                        )}
-
-                        {/* AI画像 */}
-                        <div className="bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 rounded-xl p-5 text-center">
-                          <div className="w-24 h-24 bg-gradient-to-br from-purple-200 to-pink-200 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span className="text-4xl">🐾</span>
-                          </div>
-                          <p className="text-sm text-gray-600">AI生成的专属标识</p>
-                        </div>
-                      </div>
-
-                      {/* 底部信息 */}
-                      <div className="mt-8 pt-6 border-t-2 border-gray-100 flex justify-between items-center text-sm text-gray-500">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-500" />
-                          <span>由 PawNames AI 生成</span>
-                        </div>
-                        <div>
-                          证书编号: {Math.random().toString(36).substr(2, 9).toUpperCase()}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 操作按钮 */}
-              <div className="max-w-2xl mx-auto grid md:grid-cols-3 gap-4">
-                <button className="flex items-center justify-center gap-2 px-6 py-4 bg-white border-2 border-purple-300 text-purple-600 rounded-xl font-semibold hover:bg-purple-50 transition-all">
-                  <Download className="w-5 h-5" />
-                  下载PDF
-                </button>
-                <button className="flex items-center justify-center gap-2 px-6 py-4 bg-white border-2 border-pink-300 text-pink-600 rounded-xl font-semibold hover:bg-pink-50 transition-all">
-                  <Share2 className="w-5 h-5" />
-                  分享证书
-                </button>
-                <button 
-                  onClick={() => setCurrentScreen('dashboard')}
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
-                >
-                  <PawPrint className="w-5 h-5" />
-                  完成
-                </button>
-              </div>
-
-              {/* 提示信息 */}
-              <div className="max-w-2xl mx-auto mt-6 bg-white rounded-2xl p-6 shadow-lg">
-                <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-pink-500" />
-                  温馨提示
-                </h4>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• 证书已自动保存到"我的宠物档案"</li>
-                  <li>• 您可以随时在档案中查看和下载证书</li>
-                  <li>• 支持分享到微信、小红书等社交平台</li>
-                  <li>• 建议打印后作为实体纪念保存</li>
-                </ul>
-              </div>
-            </>
           )}
         </div>
       </div>
@@ -1713,7 +1341,7 @@ const PawNamesApp = () => {
             </div>
           )}
 
-          {/* 名字PK投票 */}
+          {/* PK投票 */}
           {communityTab === 'pk' && (
             <div>
               <div className="flex items-center justify-between mb-6">
@@ -1959,6 +1587,90 @@ const PawNamesApp = () => {
                     <button className="text-purple-600 text-sm font-semibold">查看</button>
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Results screen
+  if (currentScreen === 'results') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+        <div className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-10">
+          <div className="max-w-4xl mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <button onClick={() => setCurrentScreen('wizard')} className="flex items-center gap-2 text-gray-600">
+                <ChevronLeft className="w-5 h-5" />
+                重新生成
+              </button>
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <PawPrint className="w-5 h-5 text-white" />
+                </div>
+                <span className="font-bold text-xl">PawNames</span>
+              </div>
+              <button onClick={() => setCurrentScreen('dashboard')} className="text-gray-600">
+                完成
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">精心为你挑选的名字</h1>
+            <p className="text-gray-600">点击收藏喜欢的名字</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {generatedNames.map((name, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-3xl font-bold text-gray-800">{name.name}</h3>
+                      <div className="px-3 py-1 bg-purple-100 rounded-full">
+                        <span className="text-xs font-semibold text-purple-600">{name.score}分</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-500">{name.origin}</p>
+                  </div>
+                  <button onClick={() => toggleSaveName(name)} className="p-2">
+                    <Bookmark className={`w-6 h-6 ${savedNames.find(n => n.name === name.name) ? 'fill-pink-500 text-pink-500' : 'text-gray-400'}`} />
+                  </button>
+                </div>
+                
+                <p className="text-gray-700 mb-4">{name.meaning}</p>
+                
+                <div className="flex gap-2">
+                  <button className="flex-1 flex items-center justify-center gap-2 py-2 border-2 border-gray-200 rounded-lg">
+                    <Volume2 className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm font-semibold">试读</span>
+                  </button>
+                  <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold">
+                    选择
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {savedNames.length > 0 && (
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                <Heart className="w-5 h-5 text-pink-500" />
+                我的收藏 ({savedNames.length})
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {savedNames.map((name, idx) => (
+                  <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-lg border-2 border-purple-200">
+                    <span className="font-semibold text-purple-700">{name.name}</span>
+                    <button onClick={() => toggleSaveName(name)} className="text-purple-400">×</button>
+                  </div>
+                ))}
               </div>
             </div>
           )}
